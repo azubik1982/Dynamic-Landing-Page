@@ -6,20 +6,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Alata&family=Homenaje&family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <main>
         <h1>
             <span id="greeting"></span>
             <span id="name" contenteditable="true"></span>
         </h1>
-
         <h2>
             <time id="time"></time>
         </h2>
-
-        <h2>What Is Your Focus For Today?</h2>
-
+        <div class="container">
+            <span id="btn" class="toggle-button"></span>
+            <span class="text">Am/Pm</span>
+        </div>
+        <h2>
+            What Is Your Focus For Today?
+        </h2>
         <h2 id="focus" contenteditable="true"></h2>
     </main>
         <script src="script.js">

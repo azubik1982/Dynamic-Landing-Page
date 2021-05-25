@@ -5,7 +5,7 @@ const doc = document,
       name = doc.getElementById('name'),
       focus = doc.getElementById('focus'),
       showAmPm = true;
-
+let  btn = doc.getElementById('btn');
 // Show Time
 function showTime() {
   let today = new Date(),
@@ -19,13 +19,14 @@ function showTime() {
   // 12hr Format
   hour = hour % 12 || 12;
 
-  // Output Time
-  time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(
-    sec
-  )} ${showAmPm ? amPm : ''}`;
+  time.innerHTML = `${hour}<span>:</span> ${addZero(min)}<span>:</span> ${addZero(sec)} ${showAmPm ? amPm : ''}`;
 
   setTimeout(showTime, 1000);
 }
+
+btn.addEventListener('click', function() {
+  btn.classList.toggle('active');
+});
 
 // Add Zeros
 function addZero(n) {
@@ -36,15 +37,14 @@ function addZero(n) {
 function setBgGreet() {
   let today = new Date(),
       hour = today.getHours();
-
   if (hour < 12) {
-      doc.body.style.backgroundImage = "url('https://i.ibb.co/7vDLJFb/morning.jpg')";
+      doc.body.style.backgroundImage = "url('img/morning.jpg')";
       greeting.textContent = 'Good Morning, ';
   } else if (hour < 18) {
-      doc.body.style.backgroundImage = "url('https://i.ibb.co/3mThcXc/afternoon.jpg')";
+      doc.body.style.backgroundImage = "url('img/afternoon.jpg')";
       greeting.textContent = 'Good Afternoon, ';
   } else {
-      doc.body.style.backgroundImage = "url('https://i.ibb.co/924T2Wv/night.jpg')";
+      doc.body.style.backgroundImage = "url('img/night.jpg')";
       greeting.textContent = 'Good Evening, ';
       doc.body.style.color = 'white';
   }
@@ -62,7 +62,6 @@ function getName() {
 // Set Name
 function setName(e) {
   if (e.type === 'keypress') {
-    // Make sure enter is pressed
     if (e.which == 13 || e.keyCode == 13) {
       localStorage.setItem('name', e.target.innerText);
       name.blur();
@@ -84,7 +83,6 @@ function getFocus() {
 // Set Focus
 function setFocus(e) {
   if (e.type === 'keypress') {
-    // Make sure enter is pressed
     if (e.which == 13 || e.keyCode == 13) {
       localStorage.setItem('focus', e.target.innerText);
       focus.blur();
@@ -99,7 +97,6 @@ name.addEventListener('blur', setName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
 
-// Run
 showTime();
 setBgGreet();
 getName();
