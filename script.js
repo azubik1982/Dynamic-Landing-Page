@@ -5,10 +5,14 @@ const doc = document,
       name = doc.getElementById('name'),
       focus = doc.getElementById('focus'),
       showAmPm = true;
-let  btn = doc.getElementById('btn');
+
+let btn24hrs = doc.getElementById('btn24hr'),
+    btnBlck = doc.getElementById('btnBlack');
+
 // Show Time
 function showTime() {
   let today = new Date(),
+  //let today = new Date(2021, 10, 06, 20, 10, 51),
       hour = today.getHours(),
       min = today.getMinutes(),
       sec = today.getSeconds();
@@ -16,16 +20,25 @@ function showTime() {
   // Set AM or PM
   const amPm = hour >= 12 ? 'PM' : 'AM';
 
-  // 12hr Format
-  hour = hour % 12 || 12;
-
-  time.innerHTML = `${hour}<span>:</span> ${addZero(min)}<span>:</span> ${addZero(sec)} ${showAmPm ? amPm : ''}`;
-
+  if (btn24hrs.classList.contains('active')) {
+    // 24hr Format
+    hour = hour;
+    time.innerHTML = `${hour}<span>:</span> ${addZero(min)}<span>:</span> ${addZero(sec)}`;
+  } else {
+    // 12hr Format
+    hour = hour % 12 || 12;
+    time.innerHTML = `${hour}<span>:</span> ${addZero(min)}<span>:</span> ${addZero(sec)} ${showAmPm ? amPm : ''}`;
+  }
   setTimeout(showTime, 1000);
 }
 
-btn.addEventListener('click', function() {
-  btn.classList.toggle('active');
+//btns - click
+btn24hrs.addEventListener('click', function() {
+  btn24hrs.classList.toggle('active');
+});
+
+btnBlck.addEventListener('click', function() {
+  btnBlck.classList.toggle('active');
 });
 
 // Add Zeros
@@ -37,16 +50,29 @@ function addZero(n) {
 function setBgGreet() {
   let today = new Date(),
       hour = today.getHours();
-  if (hour < 12) {
+
+  if (btnBlck.classList.contains('active') === true) {
+    doc.body.style.backgroundImage = "url('img/night.jpg')";
+    doc.body.style.color = 'white';
+    if (hour < 12) {
+      greeting.textContent = 'Good Morning, ';
+    } else if (hour < 18) {
+      greeting.textContent = 'Good Afternoon, ';
+    } else {
+      greeting.textContent = 'Good Evening, ';
+    }
+  } else {
+     if (hour < 12) {
       doc.body.style.backgroundImage = "url('img/morning.jpg')";
       greeting.textContent = 'Good Morning, ';
-  } else if (hour < 18) {
+    } else if (hour < 18) {
       doc.body.style.backgroundImage = "url('img/afternoon.jpg')";
       greeting.textContent = 'Good Afternoon, ';
-  } else {
+    } else {
       doc.body.style.backgroundImage = "url('img/night.jpg')";
       greeting.textContent = 'Good Evening, ';
       doc.body.style.color = 'white';
+    }
   }
 }
 
