@@ -3,38 +3,34 @@ const doc = document,
       time = doc.getElementById('time'),
       greeting = doc.getElementById('greeting'),
       name = doc.getElementById('name'),
-      focus = doc.getElementById('focus'),
-      showAmPm = true;
+      focus = doc.getElementById('focus');
 
 let btn24hrs = doc.getElementById('btn24hr'),
-    btnBlck = doc.getElementById('btnBlack');
-    // today = new Date(),
-    // hour = today.getHours(),
-    // min = today.getMinutes(),
-    // sec = today.getSeconds();
+    btnBlck = doc.getElementById('btnBlack'),
+    today = new Date(),
+    hour = today.getHours(),
+    min = today.getMinutes(),
+    showAmPm = true,
+    sec = today.getSeconds();
 
 
 // Show Time
 function showTime() {
-  let today = new Date(),
-  //let today = new Date(2021, 10, 06, 20, 10, 51),
-    hour = today.getHours(),
-    min = today.getMinutes(),
+    today = new Date();
+    hour = today.getHours();
+    min = today.getMinutes();
     sec = today.getSeconds();
 
   // Set AM or PM
   const amPm = hour >= 12 ? 'PM' : 'AM';
 
-  if (btn24hrs.classList.contains('active')) {
-    // 24hr Format
-    hour = hour;
-    time.innerHTML = `${hour}<span>:</span> ${addZero(min)}<span>:</span> ${addZero(sec)}`;
-  } else {
-    // 12hr Format
+  showAmPm = !btn24hrs.classList.contains('active');
+
+  if (showAmPm) {
     hour = hour % 12 || 12;
-    time.innerHTML = `${hour}<span>:</span> ${addZero(min)}<span>:</span> ${addZero(sec)} ${showAmPm ? amPm : ''}`;
   }
-  setTimeout(showTime, 1000);
+  time.innerHTML = `${hour}<span>:</span> ${addZero(min)}<span>:</span> ${addZero(sec)} ${showAmPm ? amPm : ''}`;
+  setInterval(showTime, 1000);
 }
 
 //btns - click
@@ -44,6 +40,7 @@ btn24hrs.addEventListener('click', function() {
 
 btnBlck.addEventListener('click', function() {
   btnBlck.classList.toggle('active');
+  setBgGreet();
 });
 
 // Add Zeros
@@ -53,11 +50,8 @@ function addZero(n) {
 
 // Set Background and Greeting
 function setBgGreet() {
-  let today = new Date(),
-  //let today = new Date(2021, 10, 06, 20, 10, 51),
-    hour = today.getHours();
 
-  if (btnBlck.classList.contains('active') === true) {
+  if (btnBlck.classList.contains('active')) {
     doc.body.style.backgroundImage = "url('img/night.jpg')";
     doc.body.style.color = 'white';
     if (hour < 12) {
@@ -67,6 +61,7 @@ function setBgGreet() {
     } else {
       greeting.textContent = 'Good Evening, ';
     }
+
   } else {
      if (hour < 12) {
       doc.body.style.backgroundImage = "url('img/morning.jpg')";
