@@ -8,14 +8,19 @@ const doc = document,
 
 let btn24hrs = doc.getElementById('btn24hr'),
     btnBlck = doc.getElementById('btnBlack');
+    // today = new Date(),
+    // hour = today.getHours(),
+    // min = today.getMinutes(),
+    // sec = today.getSeconds();
+
 
 // Show Time
 function showTime() {
   let today = new Date(),
   //let today = new Date(2021, 10, 06, 20, 10, 51),
-      hour = today.getHours(),
-      min = today.getMinutes(),
-      sec = today.getSeconds();
+    hour = today.getHours(),
+    min = today.getMinutes(),
+    sec = today.getSeconds();
 
   // Set AM or PM
   const amPm = hour >= 12 ? 'PM' : 'AM';
@@ -49,7 +54,8 @@ function addZero(n) {
 // Set Background and Greeting
 function setBgGreet() {
   let today = new Date(),
-      hour = today.getHours();
+  //let today = new Date(2021, 10, 06, 20, 10, 51),
+    hour = today.getHours();
 
   if (btnBlck.classList.contains('active') === true) {
     doc.body.style.backgroundImage = "url('img/night.jpg')";

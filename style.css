@@ -31,7 +31,9 @@
   }
 
   .container {
-
+    display: flex;
+    justify-content: end;
+    margin-bottom: 3rem;
   }
 
   .toggle-button {
@@ -46,7 +48,8 @@
     height: 50px;
     vertical-align: top;
     background: transparent;
-    border: 3px solid rgba(0, 0, 0, 0.6);
+    color: green;
+    border: 3px solid rgba(255, 255, 255, 0.6);
     border-radius: 30px;
     outline: none;
     cursor: pointer;
