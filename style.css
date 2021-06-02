@@ -31,7 +31,6 @@
   }
 
   .container {
-    display: flex;
     justify-content: end;
     margin-bottom: 3rem;
   }

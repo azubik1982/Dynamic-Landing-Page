@@ -7,18 +7,13 @@ const doc = document,
 
 let btn24hrs = doc.getElementById('btn24hr'),
     btnBlck = doc.getElementById('btnBlack'),
-    today = new Date(),
-    hour = today.getHours(),
-    min = today.getMinutes(),
-    showAmPm = true,
-    sec = today.getSeconds();
-
+    showAmPm = true;
 
 // Show Time
 function showTime() {
-    today = new Date();
-    hour = today.getHours();
-    min = today.getMinutes();
+  let today = new Date(),
+    hour = today.getHours(),
+    min = today.getMinutes(),
     sec = today.getSeconds();
 
   // Set AM or PM
@@ -29,13 +24,15 @@ function showTime() {
   if (showAmPm) {
     hour = hour % 12 || 12;
   }
+
   time.innerHTML = `${hour}<span>:</span> ${addZero(min)}<span>:</span> ${addZero(sec)} ${showAmPm ? amPm : ''}`;
-  setInterval(showTime, 1000);
+  setTimeout(showTime, 1000);
 }
 
 //btns - click
 btn24hrs.addEventListener('click', function() {
   btn24hrs.classList.toggle('active');
+  showTime();
 });
 
 btnBlck.addEventListener('click', function() {
@@ -50,6 +47,8 @@ function addZero(n) {
 
 // Set Background and Greeting
 function setBgGreet() {
+  let today = new Date(),
+    hour = today.getHours();
 
   if (btnBlck.classList.contains('active')) {
     doc.body.style.backgroundImage = "url('img/night.jpg')";
@@ -61,14 +60,15 @@ function setBgGreet() {
     } else {
       greeting.textContent = 'Good Evening, ';
     }
-
   } else {
      if (hour < 12) {
       doc.body.style.backgroundImage = "url('img/morning.jpg')";
       greeting.textContent = 'Good Morning, ';
+      doc.body.style.color = 'black';
     } else if (hour < 18) {
       doc.body.style.backgroundImage = "url('img/afternoon.jpg')";
       greeting.textContent = 'Good Afternoon, ';
+      doc.body.style.color = 'black';
     } else {
       doc.body.style.backgroundImage = "url('img/night.jpg')";
       greeting.textContent = 'Good Evening, ';
